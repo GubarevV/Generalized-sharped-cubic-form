@@ -1,0 +1,170 @@
+# It is code verifying identities fulfilled for the algebra A\oplus A\oplus A from Example 1
+
+FF:=Rationals;
+lambda:=Indeterminate(FF,"lambda");;
+alpha:=Indeterminate(FF,"alpha");;
+beta:=Indeterminate(FF,"beta");;
+gamma:=Indeterminate(FF,"gamma");;
+delta:=Indeterminate(FF,"delta");;
+epsilon:=Indeterminate(FF,"epsilon");;
+kappa:=Indeterminate(FF,"kappa");;
+phi:=Indeterminate(FF,"phi");;
+ksi:=Indeterminate(FF,"ksi");;
+rho:=Indeterminate(FF,"rho");;
+zeta:=Indeterminate(FF,"zeta");;
+tau:=Indeterminate(FF,"tau");;
+nu:=Indeterminate(FF,"nu");;
+mu:=Indeterminate(FF,"mu");;
+a:=Indeterminate(FF,"a");;
+b:=Indeterminate(FF,"b");;
+c:=Indeterminate(FF,"c");;
+d:=Indeterminate(FF,"d");;
+e:=Indeterminate(FF,"e");;
+f:=Indeterminate(FF,"f");;
+g:=Indeterminate(FF,"g");;
+h:=Indeterminate(FF,"h");;
+i:=Indeterminate(FF,"i");;
+j:=Indeterminate(FF,"j");;
+k:=Indeterminate(FF,"k");;
+l:=Indeterminate(FF,"l");;
+m:=Indeterminate(FF,"m");;
+n:=Indeterminate(FF,"n");;
+o:=Indeterminate(FF,"o");;
+p:=Indeterminate(FF,"p");;
+t:=Indeterminate(FF,"t");;
+F:=FunctionField(FF, 30);
+
+z:=alpha^0;
+
+empty:=z*[0,0,0];
+
+z1:=z*[1,0,0,];
+z2:=z*[0,1,0];
+z3:=z*[0,0,1];
+
+id:=z1+z2+z3;
+
+r:=a*z1+b*z2+c*e+lambda*(d*z1+e*z2+f*z3);
+q:=g*z1+h*z2+i*z3+lambda*(j*z1+k*z2+l*z3);
+s:=m*z1+n*z2+o*z3+lambda*(p*z1+tau*z2+nu*z3);
+x:=mu*z1+t*z2+phi*z3+lambda*(ksi*z1+rho*z2+zeta*z3);
+y:=alpha*z1+beta*z2+gamma*z3+lambda*(delta*z1+epsilon*z2+kappa*z3);
+
+Soperator:= function(u,v)
+return u[1]*(v[3]+v[2])+u[2]*(v[1]+v[3])+u[3]*(v[1]+v[2]);
+end;
+
+inner:= function(u,v)
+return u[1]*v[1]+u[2]*v[2]+u[3]*v[3]+3*lambda*Soperator(u,v);
+end;
+
+innertilde:= function(u,v)
+return inner(u,v)+delta(u,v);
+end;
+
+delta:= function(u,v)
+return -3*lambda*Soperator(u,v);
+end;
+
+trace:= function(u)
+return u[1]+u[2]+u[3];
+end;
+
+spur:= function(u)
+return u[1]*u[2]+u[1]*u[3]+u[2]*u[3];
+end;
+
+norm:= function(u)
+return u[1]*u[2]*u[3];
+end;
+
+normm:= function(u,v)
+return u[1]*u[2]*v[3]+u[1]*v[2]*u[3]+v[1]*u[2]*u[3];
+end;
+
+normmm:= function(u,v,w)
+return norm(v+u+w)-norm(v+u)-norm(v+w)-norm(u+w)+norm(u)+norm(v)+norm(w);;
+end;
+
+sharp1:= function(u)
+return u[2]*u[3]-lambda*(2*u[1]*(u[2]+u[3])+u[2]^2+u[3]^2);
+end;
+
+sharp2:= function(u)	
+return u[1]*u[3]-lambda*(2*u[2]*(u[1]+u[3])+u[1]^2+u[3]^2);
+end;
+
+sharp3:= function(u)
+return u[2]*u[1]-lambda*(2*u[3]*(u[2]+u[1])+u[2]^2+u[1]^2);
+end;
+
+sharp:= function(u)
+return z*[sharp1(u),sharp2(u),sharp3(u)];
+end;
+
+sharpproduct := function(u,v)
+return sharp(u+v)-sharp(u)-sharp(v);
+end;
+
+prod:= function(u,v)
+return (sharpproduct(u,v)+trace(u)*v+trace(v)*u-Soperator(u,v)*id)/2;
+end;
+
+asso:= function(u,v,w)
+return prod(prod(u,v),w)-prod(u,prod(v,w));
+end;
+
+Psi:= function(u,v,w)
+return (sharpproduct(sharpproduct(u,v),w)-sharpproduct(u,sharpproduct(v,w))+inner(u,v)*w+delta(u,v)*w-inner(v,w)*u-delta(v,w)*u)/4;
+end;
+
+Wb := function(z,u,v,w)
+return asso(asso(u,z,v),w,z) + asso(asso(v,z,w),u,z) + asso(asso(w,z,u),v,z);
+end;
+
+sharp(id)-(1-6*lambda)*id;
+# [ 0, 0, 0]
+prod(r,id)-r+2*lambda*trace(r)*id;
+# [ 0, 0, 0]
+sharpproduct(r,id)-(1-4*lambda)*trace(r)*id+r;
+# [ 0, 0, 0]
+QuotientRemainder(F,inner(sharpproduct(r,q),r)+inner(sharp(r),q)-3*normm(r,q),lambda^2)[2];
+# 0
+QuotientRemainder(F,(sharp(sharp(r))-(norm(r)+delta(sharp(r),r)+2*lambda*trace(r)*spur(r))*r-2*lambda*spur(r)*sharp(r)+2*lambda*(trace(r)*norm(r)+spur(r)^2)*id)[1],lambda^2)[2];
+# 0
+QuotientRemainder(F,(sharp(sharp(r))-(norm(r)+delta(sharp(r),r)+2*lambda*trace(r)*spur(r))*r-2*lambda*spur(r)*sharp(r)+2*lambda*(trace(r)*norm(r)+spur(r)^2)*id)[2],lambda^2)[2];
+# 0
+QuotientRemainder(F,(sharp(sharp(r))-(norm(r)+delta(sharp(r),r)+2*lambda*trace(r)*spur(r))*r-2*lambda*spur(r)*sharp(r)+2*lambda*(trace(r)*norm(r)+spur(r)^2)*id)[3],lambda^2)[2];
+# 0
+delta(r,id)+6*lambda*trace(r);
+# 0
+inner(r,id)-(1+6*lambda)*trace(r);
+# 0
+QuotientRemainder(F,inner(sharp(r),r)-3*norm(r),lambda^2)[2];
+# 0
+QuotientRemainder(F,trace(sharp(r))-(1-6*lambda)*(spur(r)-delta(r,r))+2*lambda*trace(r)^2,lambda^2)[2];
+# 0
+innertilde(sharpproduct(r,q),s)-innertilde(r,sharpproduct(q,s));
+# 0
+inner(sharpproduct(r,q),s)-inner(r,sharpproduct(q,s))-trace(r)*delta(q,s)+trace(s)*delta(q,r);
+# 0
+QuotientRemainder(F,inner(sharpproduct(r,q),s)+inner(sharpproduct(q,s),r)+inner(sharpproduct(s,r),q)-3*normmm(r,q,s),lambda^2)[2];
+# 0
+QuotientRemainder(F,norm(sharp(r))-norm(r)*(norm(r)+delta(sharp(r),r)),lambda^2)[2];
+# 0
+trace(sharpproduct(r,q))-(1-4*lambda)*trace(r)*trace(q)+innertilde(r,q);
+# 0
+Psi(r,s,q)+Psi(s,q,r)+Psi(q,r,s);
+# [ 0, 0, 0 ]
+delta(Psi(r,s,q),x)+delta(Psi(q,s,x),r)+delta(Psi(x,s,r),q);
+# 0
+delta(s,sharpproduct(Psi(r,s,q),x)+sharpproduct(Psi(q,s,x),r)+sharpproduct(Psi(x,s,r),q));
+# 0
+Wb(r,s,q,x);
+# [ 0, 0, 0 ]
+Psi(Psi(r,s,q),x,s)+Psi(Psi(q,s,x),r,s)+Psi(Psi(x,s,r),q,s);
+# [ 0, 0, 0 ]
+Psi(r,q,s)+Psi(s,q,r);
+# [ 0, 0, 0 ]
+QuotientRemainder(F,Psi(x,Psi(r,q,s),y)-Psi(Psi(x,r,y),q,s)-Psi(r,q,Psi(x,s,y))-Psi(r,Psi(x,q,y),s),lambda^2)[2];
+# [ 0, 0, 0 ]

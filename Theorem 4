@@ -1,0 +1,192 @@
+(*It is a code in Wolfram Mathematica
+(* The following is a linear combination of base monomials noted in \
+article as \xi(x_1,x_2,x_3,x_4,x_5)*)
+
+psi[{a_, b_, c_, d_, e_}] := 
+ pr[ pr[ pr[b, a], c], pr[e, d]] \[Lambda][1, 1] + 
+  pr[ pr[ pr[b, a], d], pr[e, c]] \[Lambda][1, 2] + 
+  pr[ pr[ pr[b, a], e], pr[d, c]] \[Lambda][1, 3] + 
+  pr[ pr[ pr[b, a], pr[d, c]], e] \[Lambda][1, 4] + 
+  pr[ pr[ pr[b, a], pr[e, c]], d] \[Lambda][1, 5] + 
+  pr[ pr[ pr[b, a], pr[e, d]], c] \[Lambda][1, 6] + 
+  pr[ pr[ pr[c, a], b], pr[e, d]] \[Lambda][1, 7] + 
+  pr[ pr[ pr[c, a], d], pr[e, b]] \[Lambda][1, 8] + 
+  pr[ pr[ pr[c, a], e], pr[d, b]] \[Lambda][1, 9] + 
+  pr[ pr[ pr[c, a], pr[d, b]], e] \[Lambda][1, 10] + 
+  pr[ pr[ pr[c, a], pr[e, b]], d] \[Lambda][1, 11] + 
+  pr[ pr[ pr[c, a], pr[e, d]], b] \[Lambda][1, 12] + 
+  pr[ pr[ pr[c, b], a], pr[e, d]] \[Lambda][1, 13] + 
+  pr[ pr[ pr[c, b], d], pr[e, a]] \[Lambda][1, 14] + 
+  pr[ pr[ pr[c, b], e], pr[d, a]] \[Lambda][1, 15] + 
+  pr[ pr[ pr[c, b], pr[e, d]], a] \[Lambda][1, 16] + 
+  pr[ pr[ pr[d, a], b], pr[e, c]] \[Lambda][1, 17] + 
+  pr[ pr[ pr[d, a], c], pr[e, b]] \[Lambda][1, 18] + 
+  pr[ pr[ pr[d, a], e], pr[c, b]] \[Lambda][1, 19] + 
+  pr[ pr[ pr[d, a], pr[c, b]], e] \[Lambda][1, 20] + 
+  pr[ pr[ pr[d, a], pr[e, b]], c] \[Lambda][1, 21] + 
+  pr[ pr[ pr[d, a], pr[e, c]], b] \[Lambda][1, 22] + 
+  pr[ pr[ pr[d, b], a], pr[e, c]] \[Lambda][1, 23] + 
+  pr[ pr[ pr[d, b], c], pr[e, a]] \[Lambda][1, 24] + 
+  pr[ pr[ pr[d, b], e], pr[c, a]] \[Lambda][1, 25] + 
+  pr[ pr[ pr[d, b], pr[e, c]], a] \[Lambda][1, 26] + 
+  pr[ pr[ pr[d, c], a], pr[e, b]] \[Lambda][1, 27] + 
+  pr[ pr[ pr[d, c], b], pr[e, a]] \[Lambda][1, 28] + 
+  pr[ pr[ pr[d, c], e], pr[b, a]] \[Lambda][1, 29] + 
+  pr[ pr[ pr[e, a], b], pr[d, c]] \[Lambda][1, 30] + 
+  pr[ pr[ pr[e, a], c], pr[d, b]] \[Lambda][1, 31] + 
+  pr[ pr[ pr[e, a], d], pr[c, b]] \[Lambda][1, 32] + 
+  pr[ pr[ pr[e, a], pr[c, b]], d] \[Lambda][1, 33] + 
+  pr[ pr[ pr[e, a], pr[d, b]], c] \[Lambda][1, 34] + 
+  pr[ pr[ pr[e, a], pr[d, c]], b] \[Lambda][1, 35] + 
+  pr[ pr[ pr[e, b], a], pr[d, c]] \[Lambda][1, 36] + 
+  pr[ pr[ pr[e, b], pr[d, c]], a] \[Lambda][1, 37] + 
+  pr[ pr[ pr[e, c], a], pr[d, b]] \[Lambda][1, 38] + 
+  pr[ pr[ pr[e, d], a], pr[c, b]] \[Lambda][1, 39] + 
+  pr[ pr[ pr[ pr[b, a], c], d], e] \[Lambda][1, 40] + 
+  pr[ pr[ pr[ pr[b, a], c], e], d] \[Lambda][1, 41] + 
+  pr[ pr[ pr[ pr[b, a], d], c], e] \[Lambda][1, 42] + 
+  pr[ pr[ pr[ pr[b, a], d], e], c] \[Lambda][1, 43] + 
+  pr[ pr[ pr[ pr[b, a], e], c], d] \[Lambda][1, 44] + 
+  pr[ pr[ pr[ pr[b, a], e], d], c] \[Lambda][1, 45] + 
+  pr[ pr[ pr[ pr[c, a], b], d], e] \[Lambda][1, 46] + 
+  pr[ pr[ pr[ pr[c, a], b], e], d] \[Lambda][1, 47] + 
+  pr[ pr[ pr[ pr[c, a], d], b], e] \[Lambda][1, 48] + 
+  pr[ pr[ pr[ pr[c, a], d], e], b] \[Lambda][1, 49] + 
+  pr[ pr[ pr[ pr[c, a], e], b], d] \[Lambda][1, 50] + 
+  pr[ pr[ pr[ pr[c, a], e], d], b] \[Lambda][1, 51] + 
+  pr[ pr[ pr[ pr[c, b], a], d], e] \[Lambda][1, 52] + 
+  pr[ pr[ pr[ pr[c, b], a], e], d] \[Lambda][1, 53] + 
+  pr[ pr[ pr[ pr[c, b], d], a], e] \[Lambda][1, 54] + 
+  pr[ pr[ pr[ pr[c, b], d], e], a] \[Lambda][1, 55] + 
+  pr[ pr[ pr[ pr[c, b], e], a], d] \[Lambda][1, 56] + 
+  pr[ pr[ pr[ pr[c, b], e], d], a] \[Lambda][1, 57] + 
+  pr[ pr[ pr[ pr[d, a], b], c], e] \[Lambda][1, 58] + 
+  pr[ pr[ pr[ pr[d, a], b], e], c] \[Lambda][1, 59] + 
+  pr[ pr[ pr[ pr[d, a], c], b], e] \[Lambda][1, 60] + 
+  pr[ pr[ pr[ pr[d, a], c], e], b] \[Lambda][1, 61] + 
+  pr[ pr[ pr[ pr[d, a], e], b], c] \[Lambda][1, 62] + 
+  pr[ pr[ pr[ pr[d, a], e], c], b] \[Lambda][1, 63] + 
+  pr[ pr[ pr[ pr[d, b], a], c], e] \[Lambda][1, 64] + 
+  pr[ pr[ pr[ pr[d, b], a], e], c] \[Lambda][1, 65] + 
+  pr[ pr[ pr[ pr[d, b], c], a], e] \[Lambda][1, 66] + 
+  pr[ pr[ pr[ pr[d, b], c], e], a] \[Lambda][1, 67] + 
+  pr[ pr[ pr[ pr[d, b], e], a], c] \[Lambda][1, 68] + 
+  pr[ pr[ pr[ pr[d, b], e], c], a] \[Lambda][1, 69] + 
+  pr[ pr[ pr[ pr[d, c], a], b], e] \[Lambda][1, 70] + 
+  pr[ pr[ pr[ pr[d, c], a], e], b] \[Lambda][1, 71] + 
+  pr[ pr[ pr[ pr[d, c], b], a], e] \[Lambda][1, 72] + 
+  pr[ pr[ pr[ pr[d, c], b], e], a] \[Lambda][1, 73] + 
+  pr[ pr[ pr[ pr[d, c], e], a], b] \[Lambda][1, 74] + 
+  pr[ pr[ pr[ pr[d, c], e], b], a] \[Lambda][1, 75] + 
+  pr[ pr[ pr[ pr[e, a], b], c], d] \[Lambda][1, 76] + 
+  pr[ pr[ pr[ pr[e, a], b], d], c] \[Lambda][1, 77] + 
+  pr[ pr[ pr[ pr[e, a], c], b], d] \[Lambda][1, 78] + 
+  pr[ pr[ pr[ pr[e, a], c], d], b] \[Lambda][1, 79] + 
+  pr[ pr[ pr[ pr[e, a], d], b], c] \[Lambda][1, 80] + 
+  pr[ pr[ pr[ pr[e, b], a], c], d] \[Lambda][1, 81] + 
+  pr[ pr[ pr[ pr[e, b], a], d], c] \[Lambda][1, 82] + 
+  pr[ pr[ pr[ pr[e, b], c], a], d] \[Lambda][1, 83] + 
+  pr[ pr[ pr[ pr[e, b], c], d], a] \[Lambda][1, 84] + 
+  pr[ pr[ pr[ pr[e, b], d], a], c] \[Lambda][1, 85] + 
+  pr[ pr[ pr[ pr[e, c], a], b], d] \[Lambda][1, 86] + 
+  pr[ pr[ pr[ pr[e, c], a], d], b] \[Lambda][1, 87] + 
+  pr[ pr[ pr[ pr[e, c], b], a], d] \[Lambda][1, 88] + 
+  pr[ pr[ pr[ pr[e, c], b], d], a] \[Lambda][1, 89] + 
+  pr[ pr[ pr[ pr[e, c], d], a], b] \[Lambda][1, 90] + 
+  pr[ pr[ pr[ pr[e, d], a], b], c] \[Lambda][1, 91] + 
+  pr[ pr[ pr[ pr[e, d], a], c], b] \[Lambda][1, 92] + 
+  pr[ pr[ pr[ pr[e, d], b], a], c] \[Lambda][1, 93] + 
+  pr[ pr[ pr[ pr[e, d], b], c], a] \[Lambda][1, 94] + 
+  pr[ pr[ pr[ pr[e, d], c], a], b] \[Lambda][1, 95]
+
+(*Below multipliication table of base elements of algebra \
+S(\[Alpha],E)*)
+
+t:= (\[Alpha]^2 - 1)/(\[Alpha] (\[Alpha] - 2))
+
+pr[e[1], e[1]] := e[1];
+pr[e[2], e[2]] := e[2];
+
+pr[e[3], e[1]] := \[Alpha] e[3];
+pr[e[1], e[3]] := \[Alpha] e[3];
+
+pr[e[3], e[2]] := (1 - \[Alpha]) e[3];
+pr[e[2], e[3]] := (1 - \[Alpha]) e[3];
+
+pr[e[4], e[1]] := \[Alpha] e[4];
+pr[e[1], e[4]] := \[Alpha] e[4];
+
+pr[e[4], e[2]] := (1 - \[Alpha]) e[4];
+pr[e[2], e[4]] := (1 - \[Alpha]) e[4];
+
+pr[e[3], e[3]] := e[1] + t e[2];
+
+pr[e[4], e[4]] := e[1] + t e[2];
+
+(*Properties of multiplication of base elements in the algebra*)
+
+pr[x_, 0] := 0;
+pr[0, x_] := 0;
+pr[x_ + y_, z_] := Simplify[pr[x, z] + pr[y, z]];
+pr[x_, y_ + z_] := Simplify[pr[x, y] + pr[x, z]];
+pr[x_, \[Lambda][i_, j_] y_] := \[Lambda][i, j] pr[x, y];
+pr[\[Lambda][i_, j_] x_, y_] := \[Lambda][i, j] pr[x, y];
+pr[n_ x_, y_] := n pr[x, y];
+pr[x_, n_ y_] := n pr[x, y];
+
+pr[\[Alpha] x_, y_] := \[Alpha] pr[x, y];
+pr[x_, \[Alpha] y_] := \[Alpha] pr[x, y];
+
+(*Other products of elements are zero*)
+pr[e[i_], e[j_]] := 0;
+
+(*generates basic elements*)
+
+basis = Table[e[i], {i, 1, 4}];
+(*Changes any "a" into equation "a\[Equal]0", we use it later*)
+
+equation[a_] := a == 0
+
+Tuples1 = Tuples[basis, 5]; 
+(*Generates permutations of length 5 from base element \
+e[1],...,e[4].*)
+
+(*We substitute all permutations to psi and take union of similiar \
+outputs, we save obtained polynomials in the set Unident*)
+
+Unident = {};
+Do[Unident = Union[Unident, Expand[Map[psi, Tuples1]]], {i, 1, 1}]
+
+(*Number of polynomials of all substitutions*)
+Length[%]  
+
+**************************************************************************
+
+OUTPUT: 635
+
+**************************************************************************
+
+(*We collect all coefficients of base element from Unident to the set \
+Coefq4, by using Coefficient[] and take union outputs Union[] *)
+
+Coefq4 = {};
+Do[Coefq4 = Union[Coefq4,  Coefficient[Unident[[i]], {e[1], e[2], e[3], e[4]}]], {i, 1, Length[Unident]}]
+
+Eq4 = Map[equation, Coefq4]    
+(*Turns to equations all polynomials in the set Coefq4 and defined as Eq4*)
+
+Length[%] (*Equations in the set Eq4*)
+
+**************************************************************************
+
+OUTPUT: 498
+
+**************************************************************************
+
+Reduce[Union[Eq4, {\[Alpha] != 1, \[Alpha] != 0, \[Alpha] != 1/2, \[Alpha] != 
+    2, \[Alpha] != -1}], Table[\[Lambda][1, i], {i, 1, 95}]] 
+
+(*the output of solution of equations in Eq4 for every \[Alpha] not equal {-1,0,1/2,1,2} *)
+
+**************************************************************************
+OUTPUT: 

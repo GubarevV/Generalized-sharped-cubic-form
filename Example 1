@@ -1,4 +1,4 @@
-# It is code verifying identities fulfilled for the algebra A\oplus A\oplus A from Example 1
+# It is a code in GAP verifying identities fulfilled for the algebra A\oplus A\oplus A from Example 1
 
 FF:=Rationals;
 lambda:=Indeterminate(FF,"lambda");;
